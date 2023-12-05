@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+    pulmotox_mongodb_dev_tests:
+        image: 'mongo:latest'
+        container_name: 'pulmoTox_mongodb_dev_tests'
+        ports:
+            - 27017:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: pulmotox
+            MONGO_INITDB_ROOT_PASSWORD: pulmotox-dev
+        volumes:
+            # Mount the root folder that contains the backup
+            - ../src/db/backup:/backup/pulmotox
+    pulmotox_mongodb_dev_config:
+        image: docker
+        privileged: true
+        depends_on:
+            - pulmotox_mongodb_dev_tests
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        command: sh -c 'sleep 5 && docker exec pulmotox_mongodb_dev_tests mongorestore -h localhost:27017 --username pulmotox --password pulmotox-dev /backup'
+    pulmotox_dev_env:
+        build: 
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        container_name: 'pulmotox_dev_env'
+        environment:
+            CIMA_URL: "https://cima.aemps.es/cima/rest/"
+            TIMEOUT: 10
+            DDBB_PORT: 27017
+            DDBB_URL: pulmotox_dev_tests
+            DDBB_USER: 'pulmotox'
+            DDBB_PASS: 'pulmotox-dev'
+            DDBB_DB_NAME: "pulmotox"
+            DDBB_MEDICINE_COL: "medicamento"
+            DDBB_PACTIVO_COL: "principio_activo"
+            DDBB_AUTHDB: "admin"
+        volumes: 
+            - ../:/pulmotox
+            # - /:/ # BBDD
+        command: /bin/sh -c "while sleep 1000; do :; done"
+

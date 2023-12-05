@@ -1,0 +1,63 @@
+{
+	"name": "pulmotox",
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+	"service": "pulmotox_dev_env",
+	"workspaceFolder": "/pulmotox/",
+    "customizations": {
+        "vscode": {
+            "settings": { 
+                "workbench.colorTheme": "Monokai Night",
+                "window.title": "${dirty}testfile.fq${activeEditorShort}${separator}${rootName}${separator}${appName}",
+                "window.zoomLevel": 0,
+                "git.ignoreLegacyWarning": true,
+                "editor.suggestSelection": "first",
+                "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+                "python.languageServer": "Default",
+                "bracket-pair-colorizer-2.activeScopeCSS": [
+                    "borderStyle : solid",
+                    "borderWidth : 1px",
+                    "borderColor : {color}",
+                    "opacity: 0.5"
+                ],
+                "bracket-pair-colorizer-2.colors": [
+                    "#33ccff",
+                    "#ff6699",
+                    "#1aff1a"
+                ],
+                "editor.acceptSuggestionOnEnter": "off",
+                "python.dataScience.alwaysTrustNotebooks": true,
+                "workbench.iconTheme": "material-icon-theme",
+                "python.dataScience.askForKernelRestart": false,
+                "[python]": {"editor.defaultFormatter": "iansan5653.format-python-docstrings"},
+                "autoDocstring.includeExtendedSummary": true,
+                "autoDocstring.includeName": true,
+                "autoDocstring.startOnNewLine": true,
+                "terminal.integrated.shell.linux": "/bin/bash",
+                "diffEditor.ignoreTrimWhitespace": false
+            },
+            "extensions": [
+                "CoenraadS.bracket-pair-colorizer-2",
+                "eamodio.gitlens",
+                "fabiospampinato.vscode-monokai-night",
+                "hbenl.vscode-test-explorer",
+                "iansan5653.format-python-docstrings",
+                "littlefoxteam.vscode-python-test-adapter",
+                "mechatroner.rainbow-csv",
+                "mhutchie.git-graph",
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "ms-vscode-remote.remote-containers",
+                "ms-vscode-remote.remote-ssh",
+                "ms-vscode-remote.remote-ssh-edit",
+                "njpwerner.autodocstring",
+                "PKief.material-icon-theme",
+                "shd101wyy.markdown-preview-enhanced",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "vscode-icons-team.vscode-icons",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    }
+}

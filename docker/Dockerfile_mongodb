@@ -1,0 +1,4 @@
+FROM mongo:latest
+
+COPY pulmotox-users-management.bash /usr/local/bin/pulmotox-users-management.bash
+COPY ./backups/mongodump-latest /mongodump-latest

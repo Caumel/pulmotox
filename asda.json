@@ -1,0 +1,80 @@
+{
+    'nregistro': '61600',
+    'nombre': 'COZAAR PLUS 50 mg/12,5 mg COMPRIMIDOS RECUBIERTOS CON PELICULA',
+    'labtitular': 'Organon Salud, S.L.',
+    'cpresc': 'Medicamento Sujeto A Prescripción Médica',
+    'estado': {'aut': 862437600000},
+    'comerc': True,
+    'receta': True,
+    'generico': False,
+    'conduc': False,
+    'triangulo': False,
+    'huerfano': False,
+    'biosimilar': False,
+    'nosustituible': {'id': 0, 'nombre': 'N/A'},
+    'psum': False,
+    'notas': True,
+    'materialesInf': False,
+    'ema': False,
+    'docs': [
+        {'tipo': 1, 'url': 'https://cima.aemps.es/cima/pdfs/ft/61600/FT_61600.pdf', 'urlHtml': 'https://cima.aemps.es/cima/dochtml/ft/61600/FT_61600.html', 'secc': True, 'fecha': 1659563674000},
+        {'tipo': 2, 'url': 'https://cima.aemps.es/cima/pdfs/p/61600/P_61600.pdf', 'urlHtml': 'https://cima.aemps.es/cima/dochtml/p/61600/P_61600.html', 'secc': True, 'fecha': 1679529477000}
+    ],
+    'fotos': [
+        {'tipo': 'materialas', 'url': 'https://cima.aemps.es/cima/fotos/thumbnails/materialas/61600/61600_materialas.jpg', 'fecha': 1663762699000},
+        {'tipo': 'formafarmac', 'url': 'https://cima.aemps.es/cima/fotos/thumbnails/formafarmac/61600/61600_formafarmac.jpg', 'fecha': 1618210025000}
+    ],
+    'viasAdministracion': [{'id': 48, 'nombre': 'VÍA ORAL'}],
+    'formaFarmaceutica': {'id': 42, 'nombre': 'COMPRIMIDO RECUBIERTO CON PELÍCULA'},
+    'formaFarmaceuticaSimplificada': {'id': 10, 'nombre': 'COMPRIMIDO'},
+    'vtm': {'id': 146471000140107, 'nombre': 'losartán + hidroclorotiazida'},
+    'dosis': '50 mg losartan potasico; 12,5 mg hidroclorotiazida'
+},
+{
+    'nregistro': '61600',
+    'nombre': 'COZAAR PLUS 50 mg/12,5 mg COMPRIMIDOS RECUBIERTOS CON PELICULA',
+    'pactivos': 'HIDROCLOROTIAZIDA, LOSARTAN POTASICO',
+    'labtitular': 'Organon Salud, S.L.',
+    'cpresc': 'Medicamento Sujeto A Prescripción Médica',
+    'estado': {'aut': 862437600000},
+    'comerc': True,
+    'receta': True,
+    'generico': False,
+    'conduc': False,
+    'triangulo': False,
+    'huerfano': False,
+    'biosimilar': False,
+    'nosustituible': {'id': 0, 'nombre': 'N/A'},
+    'psum': False,
+    'notas': True,
+    'materialesInf': False,
+    'ema': False,
+    'docs': [
+        {'tipo': 1, 'url': 'https://cima.aemps.es/cima/pdfs/ft/61600/FT_61600.pdf', 'urlHtml': 'https://cima.aemps.es/cima/dochtml/ft/61600/FT_61600.html', 'secc': True, 'fecha': 1659563674000},
+        {'tipo': 2, 'url': 'https://cima.aemps.es/cima/pdfs/p/61600/P_61600.pdf', 'urlHtml': 'https://cima.aemps.es/cima/dochtml/p/61600/P_61600.html', 'secc': True, 'fecha': 1679529477000}
+    ],
+    'fotos': [
+        {'tipo': 'materialas', 'url': 'https://cima.aemps.es/cima/fotos/thumbnails/materialas/61600/61600_materialas.jpg', 'fecha': 1663762699000},
+        {'tipo': 'formafarmac', 'url': 'https://cima.aemps.es/cima/fotos/thumbnails/formafarmac/61600/61600_formafarmac.jpg', 'fecha': 1618210025000}
+    ],
+    'atcs': [
+        {'codigo': 'C09D', 'nombre': 'ANTAGONISTAS DE LOS RECEPTORES DE ANGIOTENSINA II, COMBINACIONES', 'nivel': 3},
+        {'codigo': 'C09DA', 'nombre': 'Antagonistas de los receptores de angiotensina II y diuréticos', 'nivel': 4},
+        {'codigo': 'C09DA01', 'nombre': 'Losartán y diuréticos', 'nivel': 5}
+    ],
+    'principiosActivos': [
+        {'id': 1343, 'codigo': '1343A', 'nombre': 'HIDROCLOROTIAZIDA', 'cantidad': '12.50', 'unidad': 'mg', 'orden': 1},
+        {'id': 7157, 'codigo': '7157PK', 'nombre': 'LOSARTAN POTASICO', 'cantidad': '50.00', 'unidad': 'mg', 'orden': 2}
+    ],
+    'excipientes': [
+        {'id': 15305, 'nombre': 'LACTOSA HIDRATADA', 'cantidad': '63.13', 'unidad': 'mg', 'orden': 4}
+    ],
+    'viasAdministracion': [{'id': 48, 'nombre': 'VÍA ORAL'}],
+    'presentaciones': [
+        {'cn': '670224', 'nombre': 'COZAAR PLUS 50 mg/12,5 mg COMPRIMIDOS RECUBIERTOS CON PELICULA , 28 comprimidos', 'estado': {'aut': 862437600000}, 'comerc': True, 'psum': False}
+    ],
+    'formaFarmaceutica': {'id': 42, 'nombre': 'COMPRIMIDO RECUBIERTO CON PELÍCULA'},
+    'formaFarmaceuticaSimplificada': {'id': 10, 'nombre': 'COMPRIMIDO'},
+    'vtm': {'id': 146471000140107, 'nombre': 'losartán + hidroclorotiazida'},
+    'dosis': '50 mg losartan potasico; 12,5 mg hidroclorotiazida'
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search App</title>
+</head>
+<body>
+    <form method="POST">
+        <input type="text" name="search" placeholder="Enter search word">
+        <input type="submit" value="Search">
+    </form>
+    {% if result %}
+        <p>Result:</p>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
