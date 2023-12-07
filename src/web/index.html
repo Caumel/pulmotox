@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Search App</title>
+    <meta charset="UTF-8">
+    <title>Text Processor</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <form method="POST">
-        <input type="text" name="search" placeholder="Enter search word">
-        <input type="submit" value="Search">
-    </form>
-    {% if result %}
-        <p>Result:</p>
-        <p>{{ result }}</p>
-    {% endif %}
+    <div class="container">
+        <input type="text" id="textInput" placeholder="Type something..." oninput="processText()">        <button id="processButton">Search</button>
+    </div>
+
+    <p>Posibles coincidencias:</p>
+    <ul id="processedText"></ul>
+    <p>Output: <span id="newFunctionOutput"></span></p>
+
+
+    <script>
+        function processText() {
+            var text = document.getElementById('textInput').value;
+            $.ajax({
+                url: '/process_text',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ text: text }),
+                success: function(response) {
+                    var processedText = document.getElementById('processedText');
+                    processedText.innerHTML = '';
+                    response.forEach(function(item) {
+                        var li = document.createElement('li');
+                        li.appendChild(document.createTextNode(item));
+                        processedText.appendChild(li);
+                    });
+                }
+            });
+        }
+        document.getElementById('processButton').addEventListener('click', function() {
+            processWithNewFunction();
+        });
+
+        document.getElementById('textInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                processWithNewFunction();
+            }
+        });
+
+        function processWithNewFunction() {
+            var text = document.getElementById('textInput').value;
+            $.ajax({
+                url: '/seach_process',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ text: text }),
+                success: function(response) {
+                    document.getElementById('newFunctionOutput').innerText = response;
+                }
+            });
+        }
+    </script>
 </body>
 </html>

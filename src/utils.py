@@ -5,6 +5,8 @@ import json
 import datetime
 import json
 import re
+import Levenshtein as lev
+from fuzzywuzzy import process
 
 def unit_datetime(unix_date):
     """
@@ -217,3 +219,28 @@ def get_data(list_elements_to_get_names):
         list_names.append({element["nregistro"]:element["nombre"]})#.split(" ")[0])
         list_objects.append(element)#.split(" ")[0])
     return list_names,list_objects
+
+
+
+
+
+# Function to suggest words
+def suggest_word(input_word, database, max_distance=3):
+    suggestions = []
+    for word in database:
+        if lev.distance(input_word.lower(), word.lower()) <= max_distance:
+            suggestions.append(word)
+    return suggestions
+
+def get_similar_words(query, word_list, limit=5):
+    """
+    Find similar words in a list to the given query word.
+    
+    :param query: The word to match.
+    :param word_list: A list of words to search in.
+    :param limit: Number of top matches to return. Defaults to 5.
+    :return: List of tuples with matching word and similarity score.
+    """
+    # Use the process.extract function to find similar words
+    similar_words = process.extract(query, word_list, limit=limit)
+    return similar_words

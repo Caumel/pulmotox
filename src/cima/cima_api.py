@@ -139,9 +139,7 @@ class MyCimaAPI:
         try:
             response = requests.get(url, timeout=timeout_value)
             resp_message = response.json()
-
-            total_pages = round(resp_message["totalFilas"] / resp_message["tamanioPagina"])
-
+            total_pages = resp_message["totalFilas"] if (resp_message["totalFilas"]<resp_message["tamanioPagina"]) else round(resp_message["totalFilas"] / resp_message["tamanioPagina"])
             list_objects = []
 
             # Looping through each page
@@ -329,8 +327,7 @@ class MyCimaAPI:
             response = requests.post(url, data=json.dumps(body), headers=headers, timeout=timeout_value)
             resp_message = response.json()
 
-            print(resp_message["totalFilas"])
-            total_pages = round(resp_message["totalFilas"] / resp_message["tamanioPagina"])
+            total_pages = resp_message["totalFilas"] if (resp_message["totalFilas"]<resp_message["tamanioPagina"]) else round(resp_message["totalFilas"] / resp_message["tamanioPagina"])
 
             list_objects = []
 
@@ -391,8 +388,7 @@ class MyCimaAPI:
             response = requests.post(url, timeout=timeout_value)
             resp_message = response.json()
 
-            print(resp_message["totalFilas"])
-            total_pages = round(resp_message["totalFilas"] / resp_message["tamanioPagina"])
+            total_pages = resp_message["totalFilas"] if (resp_message["totalFilas"]<resp_message["tamanioPagina"]) else round(resp_message["totalFilas"] / resp_message["tamanioPagina"])
 
             list_objects = []
 
