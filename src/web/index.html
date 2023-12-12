@@ -12,7 +12,8 @@
 
     <p>Posibles coincidencias:</p>
     <ul id="processedText"></ul>
-    <p>Output: <span id="newFunctionOutput"></span></p>
+    <p>Reacciones adversas:</p>
+    <ul id="processedText_adversos"></ul>
 
 
     <script>
@@ -45,14 +46,20 @@
         });
 
         function processWithNewFunction() {
-            var text = document.getElementById('textInput').value;
+            var text_adversas = document.getElementById('textInput').value;
             $.ajax({
                 url: '/seach_process',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({ text: text }),
+                data: JSON.stringify({ text: text_adversas }),
                 success: function(response) {
-                    document.getElementById('newFunctionOutput').innerText = response;
+                    var processedText_adversas = document.getElementById('processedText_adversos');
+                    processedText_adversas.innerHTML = '';
+                    response.forEach(function(item) {
+                        var li_adversas = document.createElement('li');
+                        li_adversas.appendChild(document.createTextNode(item));
+                        processedText_adversas.appendChild(li_adversas);
+                    });
                 }
             });
         }

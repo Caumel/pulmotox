@@ -28,6 +28,8 @@ services:
         container_name: 'pulmotox_dev_env'
         environment:
             CIMA_URL: "https://cima.aemps.es/cima/rest/"
+            UMLS_URL: "https://uts-ws.nlm.nih.gov/rest"
+            UMLS_API_KEY: "577c8f76-500d-4e94-9139-8a798bdbe78f"
             TIMEOUT: 10
             DDBB_PORT: 27017
             DDBB_URL: pulmotox_dev_tests

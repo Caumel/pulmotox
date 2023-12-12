@@ -8,6 +8,12 @@ import re
 import Levenshtein as lev
 from fuzzywuzzy import process
 
+import spacy
+import re
+from nltk.tokenize import word_tokenize
+
+nlp = spacy.load('es_core_news_sm')
+
 def unit_datetime(unix_date):
     """
     Converts Unix timestamp in milliseconds to a human-readable date-time format in UTC.
@@ -244,3 +250,44 @@ def get_similar_words(query, word_list, limit=5):
     # Use the process.extract function to find similar words
     similar_words = process.extract(query, word_list, limit=limit)
     return similar_words
+
+
+##############################
+#                            #
+#        Clean text          #
+#                            #
+##############################
+
+def read_medicamento_info(filename):
+    with open(filename,"r") as file:
+        data = json.load(file)
+    return data
+
+# Función para limpiar el texto
+def limpiar_texto(texto):
+    # Eliminar caracteres especiales y números
+    texto = re.sub(r'[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]', '', texto)
+    # Convertir a minúsculas
+    return texto.lower()
+
+# Lematizar el texto
+def lematizar_texto(texto):
+    doc = nlp(texto)
+    return ' '.join([token.lemma_ for token in doc])
+
+
+##############################
+#                            #
+#            UMLS            #
+#                            #
+##############################
+
+def get_pairs(lists):
+    pairs = []
+    for lst in lists:
+        for i in range(len(lst) - 1):
+            pairs.append((lst[i], lst[i+1]))
+    return pairs
+
+def remove_duplicated(lista):
+    return list(set(map(str.lower, lista)))

@@ -130,8 +130,13 @@ Base de datos:
 - [ ] Mirar que BBDD usar
 - [ ] Crear BBDD a usar con los medicamento.
 - [ ] Crear metodo para gestions de BBDD
+- [ ] Base de datos grafos, neo4j
 
 ## Error encontrados
 
 - Cuando se hace peticion de medicamentos con TI, da error en algunas paginas, mirar por que.
 - Tambien error en TO, en la pagina 20
+- No es Error como tal, pero no siempre en la lista de devuelta en forma de json, la posicion 14 corresponde a la seccion 4.8 
+
+https://cima.aemps.es/cima/dochtml/ft/51347/FT_51347.html
+https://arrows.app/#/local/id=IZg5noFI2dbeKsggpsSw
