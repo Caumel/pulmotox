@@ -119,18 +119,22 @@ Base de datos:
 - [X] Crear docker proyecto despliegue
 - [X] Crear docker proyecto develop
 - [X] Descargar todos los datos para realizar pruebas
-- [ ] Descargar pactivos de los datos descargados
-- [ ] Descargar toda la info de cada medicamento
+- [X] Descargar pactivos de los datos descargados
+- [X] Descargar toda la info de cada medicamento
 - [X] Realizar pruebas con la API
 - [ ] Metodos para actualizar cada X tiempo los medicamentos que se han actualizado, con registroCambios
 - [ ] Automatizar la descarga de los medicamentos y descargar pactivos e info
 - [X] Crear web simple con buscador
-- [ ] Mirar que metodo buscar para sugerir.
-- [ ] Crear sugerencia de texto al medicamento buscado
+- [X] Mirar que metodo buscar para sugerir.
+- [X] Crear sugerencia de texto al medicamento buscado
 - [ ] Mirar que BBDD usar
 - [ ] Crear BBDD a usar con los medicamento.
 - [ ] Crear metodo para gestions de BBDD
 - [ ] Base de datos grafos, neo4j
+- [...] Test cima
+- [ ] Test utils_clean_text
+- [ ] Test utils
+- [ ] Test umls
 
 ## Error encontrados
 

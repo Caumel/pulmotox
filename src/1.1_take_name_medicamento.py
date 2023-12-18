@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.append('../')
 os.chdir('../')
-from src import utils
+from src.utils import utils
 
 if __name__ == '__main__':
     filename = "data/nombres_2023-12-15 06:58:11.txt"

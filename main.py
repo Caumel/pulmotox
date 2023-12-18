@@ -4,13 +4,10 @@ import os
 import json
 from src.cima import cima_api as cimaAPI
 from src.umls import umls_api as umlsAPI
-from src import utils as utils
-from src import utils_clean_text as utils_clean_text
-
+from src.utils import utils as utils
+from src.utils import utils_clean_text as utils_clean_text
 
 from bs4 import BeautifulSoup
-import re
-
 import spacy
 import re
 

@@ -7,7 +7,7 @@ import string
 import time
 from cima import cima_api as cimaAPI
 from datetime import datetime
-from src import utils
+from src.utils import utils
 
 cima = cimaAPI.MyCimaAPI()
 
