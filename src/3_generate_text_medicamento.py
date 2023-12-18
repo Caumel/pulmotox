@@ -27,5 +27,5 @@ def main(filename):
             print(f"Error al realizar la peticion para el medicamento {nregistro}, con nombre {name}")
 
 if __name__ == '__main__':
-    filename = "data/nombres_pactivo_2023-11-30 16:30:30.txt"
+    filename = "data/nombres_pactivo_2023-12-16 07:58:33.txt"
     main(filename)

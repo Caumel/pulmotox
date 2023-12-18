@@ -7,10 +7,10 @@ import json
 import re
 import Levenshtein as lev
 from fuzzywuzzy import process
+from tqdm import tqdm
 
 import spacy
 import re
-from nltk.tokenize import word_tokenize
 
 nlp = spacy.load('es_core_news_sm')
 
@@ -141,6 +141,22 @@ def save_names_per_line(name,medicamento):
     with open(name, 'a') as file:
         # Convert the dictionary to a JSON string and write it to the file
         file.write(json.dumps(medicamento) + '\n')
+
+def read_names_medicamentos(path):
+    """
+    Reads a txt with all the names of all the medicaments
+
+    Input:
+        path (String): path of the file
+
+    Output:
+        names (List): list of names of medicaments
+    """
+    with open(path, 'r') as file:
+        content = file.read()
+    # Split the content by ':' and remove any whitespace
+    names = [num.strip() for num in content.split(':')]
+    return names
 
 def get_med_nregistro_name(filename):
     """
@@ -291,3 +307,24 @@ def get_pairs(lists):
 
 def remove_duplicated(lista):
     return list(set(map(str.lower, lista)))
+
+def seach_for_p_activo(lista,nregistro):
+    # Busco los pactivos
+    for linea in lista:
+        if next(iter(linea)) == nregistro:
+            p_activo = linea["pactivos"]
+    return p_activo
+
+def search_reacciones_adversas(texto_analizar,umls):
+    pairs = get_pairs(texto_analizar)
+    reacciones_adversas = []
+    for pair in tqdm(pairs):
+        text = pair[0] + " " + pair[1]
+        response, code = umls.request_text_umls(text)
+        if response["result"]["results"] is not None:
+            for index,element in enumerate(response["result"]["results"]):
+                reacciones_adversas.append(element["name"])
+        else:
+            continue
+    return remove_duplicated(reacciones_adversas)
+

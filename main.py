@@ -5,18 +5,14 @@ import json
 from src.cima import cima_api as cimaAPI
 from src.umls import umls_api as umlsAPI
 from src import utils as utils
+from src import utils_clean_text as utils_clean_text
+
 
 from bs4 import BeautifulSoup
 import re
 
 import spacy
 import re
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-import nltk
-from tqdm import tqdm
-
-nltk.download('stopwords')
 
 cima = cimaAPI.MyCimaAPI()
 umls = umlsAPI.MyUmlsAPI()
@@ -27,14 +23,10 @@ app = Flask(__name__, template_folder=template_dir)
 cima_url = os.getenv('CIMAL_URL', 'https://cima.aemps.es/cima/rest/')
 timeout_value = int(os.getenv('TIMEOUT', 10))
 path_words = "data/lista_nombre.txt"
+path_pactivos = "data/nombres_pactivo_2023-12-16 07:58:33.txt"
 names_medicamentos = None
+pactivos = None
 
-def read_words(path):
-    with open(path, 'r') as file:
-        content = file.read()
-    # Split the content by ':' and remove any whitespace
-    names = [num.strip() for num in content.split(':')]
-    return names
 
 @app.route('/')
 def index():
@@ -59,67 +51,19 @@ def seach_process_function(text):
     nregistro = list_elements[0]["nregistro"]
     text, status = cima.get_info_medicamento_section(typeDoc=1,nregister=nregistro,section="4.8")
 
-    listas_filtradas = get_clean_text(text[0]["contenido"])
-    print("lista_filtrada")
-    lista_reacciones_adversas = search_reacciones_adversas(listas_filtradas)
-    print("lista_reacciones")
-    return lista_reacciones_adversas
+    p_activo = utils.seach_for_p_activo(pactivos,nregistro)
 
+    results = []
+    lines = utils_clean_text.clean_section_4_8(text[0]["contenido"])
+    split_list = utils_clean_text.split_by_pactivo(lines,p_activo)
+    for element in split_list:
+        trastornos, texto_general = utils_clean_text.extract_trastornos(element)
+        texto_umls = utils_clean_text.prepare_texto_para_buscar_reacciones_adversas(texto_general)
+        text_analizado = utils.search_reacciones_adversas(texto_umls,umls)
 
-# TODO: Este metodo es demasiado basto, esta puesto asi para el ejemplo.
-def get_clean_text(texto):
-
-    stop_words = set(stopwords.words('spanish'))
-
-    html_content = texto
-    # Parse the HTML content
-    soup = BeautifulSoup(html_content, 'html.parser')
-
-    # Extract text and filter out empty lines
-    text = soup.get_text(separator='\n').strip()
-    cleaned_text = re.sub(r'\xa0', '', text)
-
-    lines = re.split(r'\n{2,}', cleaned_text)
-    for index,element in enumerate(lines):
-        cleaned_text = re.sub(r'\n', '', element)
-        lines[index] = cleaned_text
-
-    cleaned_text = '\n'.join(lines)
-
-    low_not_dots = ''.join([char for char in cleaned_text.lower() if char != '.'])
-    low_not_dots
-
-    a = low_not_dots.split("\n")
-
-    b = re.sub(':', '', low_not_dots)
-    texto = b.split("\n")
-
-    new_texto = []
-    for linea in texto:
-        linea_limpia = utils.limpiar_texto(linea)
-        linea_lematizada = utils.lematizar_texto(linea_limpia)
-        tokens = word_tokenize(linea_lematizada)
-        new_texto.append(tokens)
-
-    listas_filtradas = [[elemento for elemento in lista if elemento not in stop_words] for lista in new_texto]
-
-    return listas_filtradas
-
-def search_reacciones_adversas(texto_analizar):
-    pairs = utils.get_pairs(texto_analizar)
-    reacciones_adversas = []
-    for pair in tqdm(pairs):
-        text = pair[0] + " " + pair[1]
-        response, code = umls.request_text_umls(text)
-        # print(response["result"]["results"])
-        if response["result"]["results"] is not None:
-            for index,element in enumerate(response["result"]["results"]):
-                # print(element["name"])
-                reacciones_adversas.append(element["name"])
-        else:
-            continue
-            # print("Not element found")
-    return utils.remove_duplicated(reacciones_adversas)
+        results.append([trastornos,text_analizado])
+    
+    return results
 
 @app.route('/seach_process', methods=['POST'])
 def seach_process():
@@ -128,5 +72,7 @@ def seach_process():
     return jsonify(result)
 
 if __name__ == '__main__':
-    names_medicamentos = read_words(path_words)
-    app.run(debug=True)
+    names_medicamentos = utils.read_names_medicamentos(path_words)
+    pactivos = utils.get_med_nregistro_name(path_pactivos)
+    # Leer todos los p activos
+    app.run(debug=True) 

@@ -37,7 +37,7 @@ def generar_convinaciones():
             nombres,objects = utils.get_data(list_elements)
 
             utils.save_files(path,objects)
-            utils.save_names_per_line(filename,nombres)
+            utils.save_names_per_line_list(filename,nombres)
 
 if __name__ == '__main__':
     generar_convinaciones()
