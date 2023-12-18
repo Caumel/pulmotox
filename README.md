@@ -65,7 +65,13 @@ c.	Ser reacción adversa principio
     - db:
     - postprocess:
     - preprocess:
+    - web:
+    - umls:
+    - utils:
 - tests
+    - data
+    - unitary
+        -  Cima
 - .gitignore
 - main.py
 - README.md
@@ -73,7 +79,7 @@ c.	Ser reacción adversa principio
 
 ## API
 
-### Methods
+### CIMA
 
 - create_url
 - get_medicamentos
@@ -83,6 +89,11 @@ c.	Ser reacción adversa principio
 - get_info_secciones
 - buscarEnFichaTecnica
 - registroCambios
+
+### UMLS
+
+- create_url
+- request_text_umls
 
 ## BBDD
 
@@ -130,11 +141,11 @@ Base de datos:
 - [ ] Mirar que BBDD usar
 - [ ] Crear BBDD a usar con los medicamento.
 - [ ] Crear metodo para gestions de BBDD
-- [ ] Base de datos grafos, neo4j
-- [...] Test cima
+- [...] Base de datos grafos, neo4j
+- [X] Test cima
 - [ ] Test utils_clean_text
-- [ ] Test utils
-- [ ] Test umls
+- [...] Test utils
+- [X] Test umls
 
 ## Error encontrados
 

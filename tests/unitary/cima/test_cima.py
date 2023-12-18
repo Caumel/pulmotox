@@ -1,22 +1,5 @@
-import pandas as pd
-import numpy as np
-import shutil
-import os
-from pathlib import Path
-from datetime import datetime
-import time
-import threading
-import json
-import urllib
-import requests
-import hashlib
 import pytest
 from src.cima import cima_api as API
-
-
-cima_url = os.getenv('CIMAL_URL', 'https://cima.aemps.es/cima/rest/')
-timeout_value = int(os.getenv('TIMEOUT', 10))
-
 
 def md5(fname):
     """Funcion para calcular el valor md5 de un archivo
@@ -35,10 +18,10 @@ def md5(fname):
 
 @pytest.fixture
 def api():
-    """Funcion para instanciar una api de Sentinel
+    """Funcion para instanciar una api de CIMA
 
     Retorna:
-        MySentinelAPI: Instancia sentinel api
+        MyCimaAPI: Instancia cima api
     """
     return API.MyCimaAPI()
 
@@ -54,7 +37,8 @@ def test_get_medicamentos(api):
     name = "EUTIROX"
     reponse, code = api.get_medicamentos(name=name)
 
-    assert reponse["totalFilas"] == 11 \
+    assert code == 200 \
+            and reponse["totalFilas"] == 11 \
             and reponse["pagina"] == 1 \
             and reponse["resultados"][0]["nregistro"] == "64014" \
             and reponse["resultados"][0]["nombre"] == "EUTIROX 100 microgramos COMPRIMIDOS" \
@@ -117,7 +101,6 @@ def test_buscarEnFichaTecnica(api):
         "contiene":1
     }]
     lista = api.buscarEnFichaTecnica(body)
-    print(len(lista))
     medicamentos = {
         'nregistro': '71857', 'nombre': 'ANASTROZOL SANDOZ 1 MG COMPRIMIDOS RECUBIERTOS CON PELÍCULA EFG',
         'labtitular': 'Sandoz Farmaceutica S.A.', 'cpresc': 'Medicamento Sujeto A Prescripción Médica', 
