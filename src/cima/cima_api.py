@@ -261,7 +261,7 @@ class MyCimaAPI:
             print("Error: ",e)
             return None, None
 
-    def get_info_secciones(self,typeDoc=None,nregister=None):
+    def get_info_secciones(self,typeDoc=1,nregister=None):
         """Devuelve una lista con las secciones existentes para un tipo de documento y un medicamento.
 
             Parametros
@@ -286,7 +286,7 @@ class MyCimaAPI:
             "nregistro": nregister,
         }
 
-        url = self.reate_url("docSegmentado/secciones/" + str(typeDoc) + "?" ,dic_var)
+        url = self.create_url("docSegmentado/secciones/" + str(typeDoc) + "?" ,dic_var)
 
         # Send query, 
         try:
