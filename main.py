@@ -55,11 +55,11 @@ def seach_process_function(text):
     split_list = utils_clean_text.split_by_pactivo(lines,p_activo)
     for element in split_list:
         trastornos, texto_general = utils_clean_text.extract_trastornos(element)
+        trastornos = search_for_p_activos_trastornos(trastornos)
         texto_umls = utils_clean_text.prepare_texto_para_buscar_reacciones_adversas(texto_general)
         text_analizado = utils.search_reacciones_adversas(texto_umls,umls)
 
         results.append([trastornos,text_analizado])
-    
     return results
 
 @app.route('/seach_process', methods=['POST'])

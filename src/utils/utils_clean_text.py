@@ -307,6 +307,29 @@ def extract_trastornos(info):
 
     return trastornos, texto_general
 
+#############################
+#                           #
+#  P activos en trastornos  #
+#                           #
+#############################
+
+def search_for_p_activos_trastornos(trastornos):
+    """
+    Metodo para iterar sobre los trastornos y encontrar principios activos
+
+    Input:
+    - trastornos (dict): Diccionario con el texto de los trastornos por frecuencia.
+
+    Output:
+    - trastornos (dict): Diccionario con los p activos encontrados.
+    """
+    for trastorno,texto in trastornos.items():
+        for frecuencia,texto_frecuencia in trastornos[trastorno].items():
+            text = utils_clean_text.prepare_texto_para_buscar_reacciones_adversas(texto_frecuencia)
+            text_analizado = utils.search_reacciones_adversas(text,umls)
+            trastornos[trastorno][frecuencia] = text_analizado
+    return trastornos
+
 ##########################
 #                        #
 #   Prepare text umls    #
